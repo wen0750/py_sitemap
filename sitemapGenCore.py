@@ -5,8 +5,13 @@ import datetime
 from bs4 import BeautifulSoup
 from urllib.parse import urlparse
 
+# Define a variable
+sqlite_name = 'sitemap.db'
+xmlexportname = 'sitemap.xml'
+sources = ['https://www.w3schools.com/']
+
 # Set up SQLite database
-conn = sqlite3.connect('sitemap.db')
+conn = sqlite3.connect(sqlite_name)
 cursor = conn.cursor()
 
 # Define schema
@@ -121,7 +126,6 @@ skip_url = []
 base_url = ''
 
 # Scan a few sources
-sources = ['https://homester.hk', 'https://homester.hk/blog', 'https://homester.hk/page/team']
 for source in sources:
     temp_url.append(source)
     base_url = source
@@ -132,7 +136,7 @@ sitemap_xml = generate_sitemap_xml()
 print(sitemap_xml)
 
 # Save the sitemap XML to a file
-with open('sitemap.xml', 'w') as f:
+with open(xmlexportname, 'w') as f:
     f.write(sitemap_xml)
 
 print('Sitemap generated and saved to sitemap.xml')
