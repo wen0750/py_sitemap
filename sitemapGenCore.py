@@ -115,7 +115,8 @@ def scan_source(page_url, base_url):
 
     # Remove current URL from temp_url
     skip_url.append(page_url)
-    temp_url.remove(page_url)
+    if page_url in temp_url:
+        temp_url.remove(page_url)
     # Check if temp_url is not empty, then scan the first URL
     if temp_url:
         scan_source(temp_url[0], base_url)
